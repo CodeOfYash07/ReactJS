@@ -1,0 +1,187 @@
+{
+  "product": [
+    {
+      "id": "T101",
+      "p_name": "iPhone 15 Pro",
+      "p_price": 134900,
+      "p_stock": 12,
+      "p_image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600",
+      "p_category": "Smartphones",
+      "p_description": "Apple iPhone 15 Pro with A17 Pro chip, titanium design and 48MP camera system."
+    },
+    {
+      "id": "T102",
+      "p_name": "Samsung Galaxy S24 Ultra",
+      "p_price": 129999,
+      "p_stock": 8,
+      "p_image": "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=600",
+      "p_category": "Smartphones",
+      "p_description": "Samsung's flagship with built-in S Pen, 200MP camera and Snapdragon 8 Gen 3."
+    },
+    {
+      "id": "T104",
+      "p_name": "MacBook Pro 14\" M3",
+      "p_price": 199900,
+      "p_stock": 6,
+      "p_image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600",
+      "p_category": "Laptops",
+      "p_description": "Apple M3 chip, Liquid Retina XDR display, up to 22 hours battery life."
+    },
+    {
+      "id": "T105",
+      "p_name": "Dell XPS 15",
+      "p_price": 149990,
+      "p_stock": 9,
+      "p_image": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600",
+      "p_category": "Laptops",
+      "p_description": "Intel Core i9, OLED 4K display, NVIDIA RTX 4070 — built for creators."
+    },
+    {
+      "id": "T106",
+      "p_name": "ASUS ROG Zephyrus G14",
+      "p_price": 119990,
+      "p_stock": 14,
+      "p_image": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600",
+      "p_category": "Laptops",
+      "p_description": "AMD Ryzen 9, RTX 4060, AniMe Matrix LED lid — ultimate gaming laptop."
+    },
+    {
+      "id": "T107",
+      "p_name": "Sony WH-1000XM5",
+      "p_price": 29990,
+      "p_stock": 35,
+      "p_image": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600",
+      "p_category": "Audio",
+      "p_description": "Industry-leading noise cancellation, 30hr battery, crystal clear call quality."
+    },
+    {
+      "id": "T108",
+      "p_name": "Apple AirPods Pro 2",
+      "p_price": 24900,
+      "p_stock": 40,
+      "p_image": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600",
+      "p_category": "Audio",
+      "p_description": "H2 chip, Adaptive Audio, USB-C charging case with 30hr total battery."
+    },
+    {
+      "id": "T109",
+      "p_name": "Samsung 65\" QLED 4K TV",
+      "p_price": 89990,
+      "p_stock": 5,
+      "p_image": "https://images.unsplash.com/photo-1593359677879-a4bb92f829e1?w=600",
+      "p_category": "TVs",
+      "p_description": "Quantum Dot technology, 120Hz refresh rate, built-in Alexa and Google Assistant."
+    },
+    {
+      "id": "T110",
+      "p_name": "Apple Watch Ultra 2",
+      "p_price": 89900,
+      "p_stock": 18,
+      "p_image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600",
+      "p_category": "Wearables",
+      "p_description": "Titanium case, precision dual-frequency GPS, 60hr battery in low power mode."
+    },
+    {
+      "id": "T111",
+      "p_name": "iPad Pro 12.9\" M2",
+      "p_price": 112900,
+      "p_stock": 11,
+      "p_image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600",
+      "p_category": "Tablets",
+      "p_description": "M2 chip, Liquid Retina XDR, Thunderbolt 4, Apple Pencil hover support."
+    },
+    {
+      "id": "T112",
+      "p_name": "Samsung Galaxy Tab S9 Ultra",
+      "p_price": 108999,
+      "p_stock": 7,
+      "p_image": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600",
+      "p_category": "Tablets",
+      "p_description": "14.6\" Dynamic AMOLED 2X, Snapdragon 8 Gen 2, IP68 water resistance."
+    },
+    {
+      "id": "T113",
+      "p_name": "NVIDIA RTX 4090",
+      "p_price": 159990,
+      "p_stock": 4,
+      "p_image": "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=600",
+      "p_category": "Components",
+      "p_description": "24GB GDDR6X, Ada Lovelace architecture — the world's fastest gaming GPU."
+    },
+    {
+      "id": "T114",
+      "p_name": "Logitech MX Master 3S",
+      "p_price": 9995,
+      "p_stock": 50,
+      "p_image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600",
+      "p_category": "Accessories",
+      "p_description": "8K DPI sensor, MagSpeed scroll wheel, works on any surface including glass."
+    },
+    {
+      "id": "T115",
+      "p_name": "Keychron Q1 Pro",
+      "p_price": 14999,
+      "p_stock": 25,
+      "p_image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600",
+      "p_category": "Accessories",
+      "p_description": "QMK/VIA wireless mechanical keyboard, aluminum body, hot-swappable switches."
+    },
+    {
+      "id": "T116",
+      "p_name": "DJI Mini 4 Pro",
+      "p_price": 74999,
+      "p_stock": 10,
+      "p_image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600",
+      "p_category": "Drones",
+      "p_description": "4K/60fps, omnidirectional obstacle sensing, 34-min flight time, under 249g."
+    },
+    {
+      "id": "T117",
+      "p_name": "GoPro HERO12 Black",
+      "p_price": 44990,
+      "p_stock": 22,
+      "p_image": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600",
+      "p_category": "Cameras",
+      "p_description": "5.3K video, HyperSmooth 6.0 stabilization, waterproof to 10m without housing."
+    },
+    {
+      "id": "T118",
+      "p_name": "Sony A7 IV",
+      "p_price": 259990,
+      "p_stock": 6,
+      "p_image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600",
+      "p_category": "Cameras",
+      "p_description": "33MP full-frame BSI sensor, 4K 60fps, real-time tracking AF — pro mirrorless."
+    },
+    {
+      "id": "T119",
+      "p_name": "Anker 200W GaN Charger",
+      "p_price": 7999,
+      "p_stock": 60,
+      "p_image": "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=600",
+      "p_category": "Accessories",
+      "p_description": "4-port GaN charger, charge laptop + phone + tablet simultaneously."
+    },
+    {
+      "id": "T120",
+      "p_name": "Samsung 990 Pro 2TB SSD",
+      "p_price": 18999,
+      "p_stock": 30,
+      "p_image": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=600",
+      "p_category": "Components",
+      "p_description": "PCIe 4.0 NVMe, 7450MB/s read speed, optimized for PS5 and PC gaming."
+    }
+  ],
+  "cart": [
+    {
+      "productId": "T101",
+      "p_name": "iPhone 15 Pro",
+      "p_price": 134900,
+      "p_image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600",
+      "p_category": "Smartphones",
+      "quantity": 1,
+      "id": "lQnZZzn6KbE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
