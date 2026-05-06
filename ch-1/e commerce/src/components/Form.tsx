@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import Table from "./Table";
 
 type orderType = {
-    name: string;
-    title: string;
-    color: string;
-    size: string;
-    code: string;
-    price: string;
+    name: string; title: string; color: string;
+    size: string; code: string; price: string;
+};
+
+const neu = {
+    shadow: '6px 6px 14px #ddd0ce, -6px -6px 14px #ffffff',
+    inset: 'inset 4px 4px 10px #ddd0ce, inset -4px -4px 10px #ffffff',
+    btnShadow: '6px 6px 16px #e8b0a8, -2px -2px 8px #ffffff',
 };
 
 export default function Form() {
-    const [name, setName] = useState<string>("");
-    const [title, setTitle] = useState<string>("");
-    const [color, setColor] = useState<string>("");
-    const [size, setSize] = useState<string>("");
-    const [code, setCode] = useState<string>("");
-    const [price, setPrice] = useState<string>("");
+    const [name, setName] = useState("");
+    const [title, setTitle] = useState("");
+    const [color, setColor] = useState("");
+    const [size, setSize] = useState("");
+    const [code, setCode] = useState("");
+    const [price, setPrice] = useState("");
     const [error, setError] = useState<any>({});
+    const [editIndex, setEditIndex] = useState<number | null>(null);
     const [allOrders, setAllOrders] = useState<orderType[]>(
         JSON.parse(localStorage.getItem("orders") || "[]")
     );
@@ -30,153 +34,186 @@ export default function Form() {
     }, [allOrders]);
 
     const validation = () => {
-        let newError: any = {};
-        if (!name) newError.name = "Name is required..";
-        if (!title) newError.title = "Title is required..";
-        if (!color) newError.color = "Color is required..";
-        if (!size) newError.size = "Size is required..";
-        if (!code) newError.code = "Code is required..";
-        if (!price) newError.price = "Price is required..";
-        else if (isNaN(Number(price))) newError.price = "Price must be a number..";
-        setError(newError);
-        return Object.keys(newError).length;
+        let e: any = {};
+        if (!name) e.name = "Name is required";
+        if (!title) e.title = "Title is required";
+        if (!color) e.color = "Color is required";
+        if (!size) e.size = "Size is required";
+        if (!code) e.code = "Code is required";
+        if (!price) e.price = "Price is required";
+        else if (isNaN(Number(price))) e.price = "Must be a number";
+        setError(e);
+        return Object.keys(e).length;
     };
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        if (validation() !== 0) return;
+    const handleEdit = (index: number) => {
+        const o = allOrders[index];
+        setName(o.name); setTitle(o.title); setColor(o.color);
+        setSize(o.size); setCode(o.code); setPrice(o.price);
+        setEditIndex(index);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-        const orderData: orderType = { name, title, color, size, code, price };
-        setAllOrders(prev => [...prev, orderData]);
-
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        if (validation() !== 0) return;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        if (editIndex !== null) {
+            const updated = [...allOrders];
+            updated[editIndex] = { name, title, color, size, code, price };
+            setAllOrders(updated);
+            setEditIndex(null);
+            toast.success("Order updated successfully!");
+        } else {
+            setAllOrders(prev => [...prev, { name, title, color, size, code, price }]);
+            toast.success("Order added successfully!");
+        }
         setName(""); setTitle(""); setColor(""); setSize(""); setCode(""); setPrice("");
-        toast.success("Order added successfully!");
     };
+
+    const inputCls = (hasError: boolean) =>
+        `w-full px-4 py-3 rounded-2xl text-sm text-[#5c3d38] outline-none bg-[#F8EDEB] border-2 transition-all duration-200 ${hasError ? 'border-[#e07060]' : 'border-transparent'}`;
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-800 p-6 md:p-12 relative overflow-hidden font-sans font-medium">
-            <ToastContainer />
-            
-            <div className="relative z-10 max-w-3xl mx-auto flex flex-col pt-8 animate-fade-in-down">
-                <div className="text-center mb-12">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-sm font-bold tracking-wide mb-4 shadow-sm uppercase">
-                        Minimalist Design
-                    </span>
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight">
-                        Order Form
-                    </h1>
-                    <p className="text-slate-500 text-lg">A seamless, clean data entry experience</p>
+        <>
+        <div className="rounded-3xl p-6 md:p-10" style={{ background: '#F8EDEB', boxShadow: neu.shadow }}>
+            <ToastContainer position="top-right" />
+
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-8">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, #FEC5BB 0%, #FCD5CE 100%)', boxShadow: '4px 4px 14px #e8b0a8' }}>
+                    <svg width="22" height="22" fill="none" stroke="#5c3d38" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                 </div>
-
-                <div className="bg-white rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-slate-100 overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-                    <div className="px-10 py-8 border-b border-slate-100 flex justify-between items-center bg-white/50">
-                        <h2 className="text-slate-900 text-2xl font-bold">Details</h2>
-                        <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                        </div>
-                    </div>
-
-                    <form className="p-10 space-y-8" onSubmit={handleSubmit}>
-                        {/* Name & Title */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Name <span className="text-red-500">*</span></label>
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    className={`w-full px-5 py-4 rounded-2xl border ${error.name ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                    placeholder="Enter product name"
-                                />
-                                {error.name && <span className="text-red-500 text-sm font-bold">{error.name}</span>}
-                            </div>
-
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Title <span className="text-red-500">*</span></label>
-                                <input
-                                    type="text"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    className={`w-full px-5 py-4 rounded-2xl border ${error.title ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                    placeholder="Enter product title"
-                                />
-                                {error.title && <span className="text-red-500 text-sm font-bold">{error.title}</span>}
-                            </div>
-                        </div>
-
-                        {/* Color & Size */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Color <span className="text-red-500">*</span></label>
-                                <select
-                                    value={color}
-                                    onChange={(e) => setColor(e.target.value)}
-                                    className={`w-full px-5 py-4 rounded-2xl border ${error.color ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                >
-                                    <option value="">Select a color</option>
-                                    {allColors.map((c, i) => <option key={i} value={c}>{c}</option>)}
-                                </select>
-                                {error.color && <span className="text-red-500 text-sm font-bold">{error.color}</span>}
-                            </div>
-
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Size <span className="text-red-500">*</span></label>
-                                <select
-                                    value={size}
-                                    onChange={(e) => setSize(e.target.value)}
-                                    className={`w-full px-5 py-4 rounded-2xl border ${error.size ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                >
-                                    <option value="">Select a size</option>
-                                    {allSizes.map((s, i) => <option key={i} value={s}>{s}</option>)}
-                                </select>
-                                {error.size && <span className="text-red-500 text-sm font-bold">{error.size}</span>}
-                            </div>
-                        </div>
-
-                        {/* Code & Price */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Code / SKU <span className="text-red-500">*</span></label>
-                                <input
-                                    type="text"
-                                    value={code}
-                                    onChange={(e) => setCode(e.target.value)}
-                                    className={`w-full px-5 py-4 rounded-2xl border ${error.code ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                    placeholder="e.g. SKU-1234"
-                                />
-                                {error.code && <span className="text-red-500 text-sm font-bold">{error.code}</span>}
-                            </div>
-
-                            <div className="space-y-3">
-                                <label className="block text-sm font-bold text-slate-700">Price ($) <span className="text-red-500">*</span></label>
-                                <div className="relative">
-                                    <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
-                                    <input
-                                        type="text"
-                                        value={price}
-                                        onChange={(e) => setPrice(e.target.value)}
-                                        className={`w-full pl-10 pr-5 py-4 rounded-2xl border ${error.price ? "border-red-400 bg-red-50/50 text-red-900" : "border-slate-200 bg-slate-50/50 text-slate-900"} placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all duration-300`}
-                                        placeholder="0.00"
-                                    />
-                                </div>
-                                {error.price && <span className="text-red-500 text-sm font-bold">{error.price}</span>}
-                            </div>
-                        </div>
-
-                        {/* Submit */}
-                        <div className="pt-8">
-                            <button
-                                type="submit"
-                                className="w-full rounded-2xl font-bold text-lg text-white py-5 px-6 bg-slate-900 hover:bg-black hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 active:scale-[0.98]"
-                            >
-                                Confirm Order
-                            </button>
-                        </div>
-                    </form>
+                <div>
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-[#5c3d38] leading-tight">Order Form</h1>
+                    <p className="text-sm text-[#a07870] mt-1">Fill in the product details</p>
                 </div>
             </div>
+
+            <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                    {/* Name */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Name <span className="text-[#e07060]">*</span>
+                        </label>
+                        <input
+                            className={inputCls(!!error.name)}
+                            style={{ boxShadow: neu.inset }}
+                            value={name} onChange={e => setName(e.target.value)}
+                            placeholder="Product name"
+                        />
+                        {error.name && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.name}</p>}
+                    </div>
+
+                    {/* Title */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Title <span className="text-[#e07060]">*</span>
+                        </label>
+                        <input
+                            className={inputCls(!!error.title)}
+                            style={{ boxShadow: neu.inset }}
+                            value={title} onChange={e => setTitle(e.target.value)}
+                            placeholder="Product title"
+                        />
+                        {error.title && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.title}</p>}
+                    </div>
+
+                    {/* Color */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Color <span className="text-[#e07060]">*</span>
+                        </label>
+                        <select
+                            className={inputCls(!!error.color)}
+                            style={{ boxShadow: neu.inset }}
+                            value={color} onChange={e => setColor(e.target.value)}
+                        >
+                            <option value="">Select color</option>
+                            {allColors.map((c, i) => <option key={i} value={c}>{c}</option>)}
+                        </select>
+                        {error.color && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.color}</p>}
+                    </div>
+
+                    {/* Size */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Size <span className="text-[#e07060]">*</span>
+                        </label>
+                        <select
+                            className={inputCls(!!error.size)}
+                            style={{ boxShadow: neu.inset }}
+                            value={size} onChange={e => setSize(e.target.value)}
+                        >
+                            <option value="">Select size</option>
+                            {allSizes.map((s, i) => <option key={i} value={s}>{s}</option>)}
+                        </select>
+                        {error.size && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.size}</p>}
+                    </div>
+
+                    {/* Code */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Code / SKU <span className="text-[#e07060]">*</span>
+                        </label>
+                        <input
+                            className={inputCls(!!error.code)}
+                            style={{ boxShadow: neu.inset }}
+                            value={code} onChange={e => setCode(e.target.value)}
+                            placeholder="SKU-1234"
+                        />
+                        {error.code && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.code}</p>}
+                    </div>
+
+                    {/* Price */}
+                    <div>
+                        <label className="block text-[11px] font-extrabold text-[#a07870] uppercase tracking-widest mb-2">
+                            Price ($) <span className="text-[#e07060]">*</span>
+                        </label>
+                        <div className="relative">
+                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c47b6e] font-extrabold text-base">$</span>
+                            <input
+                                className={`${inputCls(!!error.price)} pl-8`}
+                                style={{ boxShadow: neu.inset }}
+                                value={price} onChange={e => setPrice(e.target.value)}
+                                placeholder="0.00"
+                            />
+                        </div>
+                        {error.price && <p className="text-[#e07060] text-xs font-semibold mt-1">{error.price}</p>}
+                    </div>
+                </div>
+
+                {/* Submit */}
+                <div className="mt-8 flex gap-3">
+                    <button
+                        type="submit"
+                        className="flex-1 py-4 rounded-2xl font-extrabold text-[#5c3d38] text-base tracking-wide transition-all duration-200 active:scale-[0.98]"
+                        style={{ background: 'linear-gradient(135deg, #FEC5BB 0%, #f9a99d 100%)', boxShadow: neu.btnShadow }}
+                    >
+                        {editIndex !== null ? '✏️ Update Order' : '+ Add Order'}
+                    </button>
+                    {editIndex !== null && (
+                        <button
+                            type="button"
+                            onClick={() => { setEditIndex(null); setName(''); setTitle(''); setColor(''); setSize(''); setCode(''); setPrice(''); setError({}); }}
+                            className="px-6 py-4 rounded-2xl font-extrabold text-[#a07870] text-base tracking-wide transition-all duration-200 active:scale-[0.98]"
+                            style={{ background: '#F8EDEB', boxShadow: neu.btnShadow }}
+                        >
+                            Cancel
+                        </button>
+                    )}
+                </div>
+            </form>
         </div>
+
+        {/* All Orders below form */}
+        <div className="mt-8">
+            <Table allOrders={allOrders} setAllOrders={setAllOrders} onEdit={handleEdit} />
+        </div>
+        </>
     );
 }
